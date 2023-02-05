@@ -6,8 +6,10 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 using static System.Net.WebRequestMethods;
 //https://api.chess.com/pub/player/freazeek/games/2022/12
 namespace ChessGamesParser.Classes {
@@ -19,10 +21,12 @@ namespace ChessGamesParser.Classes {
             var uow = new UnitOfWork();
             var existingKeys = new XPCollection<GamePersist>(uow).ToList().Select(x => x.Uuid);
             var k = 0;
+            var countGames = 0;
             foreach(var game in rootGames.games) {
                 if(existingKeys.Contains(game.uuid)) {
                     continue;
                 }
+                countGames++;
                 var gamePersist = new GamePersist(uow);
 
                 gamePersist.Uuid = game.uuid;
@@ -57,6 +61,7 @@ namespace ChessGamesParser.Classes {
                 }
             }
             uow.CommitChanges();
+            MessageBox.Show(string.Format("Created - {0}", countGames));
         }
 
         internal void ImportGamesFromFile() {
@@ -64,15 +69,21 @@ namespace ChessGamesParser.Classes {
             var files = Directory.GetFiles(folder);
             foreach(var file in files) {
                 var parser = new JsonParser();
-                var games = parser.Parse(file);
+                var games = parser.ParseFile(file);
                 SaveGames(games);
             }
 
 
         }
-        public object ImportGamesFromApi() {
+        public async void ImportGamesFromApi() {
             var path = "https://api.chess.com/pub/player/freazeek/games/2023/02";
-
+            HttpClient client = new HttpClient();
+            HttpResponseMessage response = await client.GetAsync(path);
+            var jsonString= response.Content.ReadAsStringAsync().Result;
+            
+            var parser = new JsonParser();
+            var games = parser.ParseString(jsonString);
+            SaveGames(games);
         }
 
         public static DateTime UnixTimeStampToDateTime(double unixTimeStamp) {

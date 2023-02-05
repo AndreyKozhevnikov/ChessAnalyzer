@@ -15,7 +15,7 @@ namespace ChessGamesParser.Classes {
         public const string MyName = "freazeek";
         public void ExportRatingToCSV() {
             var uow = new UnitOfWork();
-            var allGames = new XPCollection<GamePersist>(uow).ToList();
+            var allGames = new XPCollection<GamePersist>(uow).ToList().OrderBy(x=>x.Date);
             var csv = new StringBuilder();
             foreach (var game in allGames) {
                 var date = game.Date;

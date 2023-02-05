@@ -25,6 +25,7 @@
         private void InitializeComponent() {
             this.importDataFromFileBtn = new DevExpress.XtraEditors.SimpleButton();
             this.importFromApi = new DevExpress.XtraEditors.SimpleButton();
+            this.exportRating = new DevExpress.XtraEditors.SimpleButton();
             this.SuspendLayout();
             // 
             // importDataFromFileBtn
@@ -45,11 +46,21 @@
             this.importFromApi.Text = "ImportFromApi";
             this.importFromApi.Click += new System.EventHandler(this.importFromApi_Click);
             // 
+            // exportRating
+            // 
+            this.exportRating.Location = new System.Drawing.Point(306, 13);
+            this.exportRating.Name = "exportRating";
+            this.exportRating.Size = new System.Drawing.Size(112, 34);
+            this.exportRating.TabIndex = 2;
+            this.exportRating.Text = "ExportRating";
+            this.exportRating.Click += new System.EventHandler(this.exportRating_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.exportRating);
             this.Controls.Add(this.importFromApi);
             this.Controls.Add(this.importDataFromFileBtn);
             this.Name = "Form1";
@@ -62,6 +73,7 @@
 
         private DevExpress.XtraEditors.SimpleButton importDataFromFileBtn;
         private DevExpress.XtraEditors.SimpleButton importFromApi;
+        private DevExpress.XtraEditors.SimpleButton exportRating;
     }
 }
 

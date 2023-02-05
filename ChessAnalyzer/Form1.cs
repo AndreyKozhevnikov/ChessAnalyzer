@@ -23,7 +23,13 @@ namespace ChessAnalyzer {
         }
 
         private void importFromApi_Click(object sender, EventArgs e) {
+            var importer = new GameImporter();
+            importer.ImportGamesFromApi();
+        }
 
+        private void exportRating_Click(object sender, EventArgs e) {
+            var analyzer = new Analyzer();
+            analyzer.ExportRatingToCSV();
         }
     }
 }

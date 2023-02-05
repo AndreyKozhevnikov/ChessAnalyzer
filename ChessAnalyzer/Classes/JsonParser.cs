@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace ChessGamesParser.Classes {
     public class JsonParser {
-        public RootGames Parse(string jsonFile) {
+        public RootGames ParseFile(string jsonFile) {
             string jsonText;
             using(var reader=new StreamReader(jsonFile)) {
                 jsonText = reader.ReadToEnd();
@@ -18,6 +18,9 @@ namespace ChessGamesParser.Classes {
             RootGames rootGames = JsonConvert.DeserializeObject<RootGames>(jsonText);
             return rootGames;
         }
-
+        public RootGames ParseString(string jsonText) {
+            RootGames rootGames = JsonConvert.DeserializeObject<RootGames>(jsonText);
+            return rootGames;
+        }
     }
 }

@@ -26,6 +26,9 @@
             this.importDataFromFileBtn = new DevExpress.XtraEditors.SimpleButton();
             this.importFromApi = new DevExpress.XtraEditors.SimpleButton();
             this.exportRating = new DevExpress.XtraEditors.SimpleButton();
+            this.buildPGN = new DevExpress.XtraEditors.SimpleButton();
+            this.treeMoves = new DevExpress.XtraTreeList.TreeList();
+            ((System.ComponentModel.ISupportInitialize)(this.treeMoves)).BeginInit();
             this.SuspendLayout();
             // 
             // importDataFromFileBtn
@@ -55,16 +58,35 @@
             this.exportRating.Text = "ExportRating";
             this.exportRating.Click += new System.EventHandler(this.exportRating_Click);
             // 
+            // buildPGN
+            // 
+            this.buildPGN.Location = new System.Drawing.Point(441, 13);
+            this.buildPGN.Name = "buildPGN";
+            this.buildPGN.Size = new System.Drawing.Size(112, 34);
+            this.buildPGN.TabIndex = 3;
+            this.buildPGN.Text = "buildPGN";
+            this.buildPGN.Click += new System.EventHandler(this.buildPGN_Click);
+            // 
+            // treeMoves
+            // 
+            this.treeMoves.Location = new System.Drawing.Point(38, 78);
+            this.treeMoves.Name = "treeMoves";
+            this.treeMoves.Size = new System.Drawing.Size(1345, 960);
+            this.treeMoves.TabIndex = 4;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(1747, 1050);
+            this.Controls.Add(this.treeMoves);
+            this.Controls.Add(this.buildPGN);
             this.Controls.Add(this.exportRating);
             this.Controls.Add(this.importFromApi);
             this.Controls.Add(this.importDataFromFileBtn);
             this.Name = "Form1";
             this.Text = "Form1";
+            ((System.ComponentModel.ISupportInitialize)(this.treeMoves)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -74,6 +96,8 @@
         private DevExpress.XtraEditors.SimpleButton importDataFromFileBtn;
         private DevExpress.XtraEditors.SimpleButton importFromApi;
         private DevExpress.XtraEditors.SimpleButton exportRating;
+        private DevExpress.XtraEditors.SimpleButton buildPGN;
+        private DevExpress.XtraTreeList.TreeList treeMoves;
     }
 }
 

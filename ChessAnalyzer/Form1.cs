@@ -1,5 +1,9 @@
-﻿using ChessGamesParser.ChessArchive;
+﻿using ChessAnalyzer.Classes;
+using ChessGamesParser.ChessArchive;
 using ChessGamesParser.Classes;
+using ChessGamesParser.Classes.XPOData;
+using DevExpress.Xpo;
+using ilf.pgn;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -30,6 +34,14 @@ namespace ChessAnalyzer {
         private void exportRating_Click(object sender, EventArgs e) {
             var analyzer = new Analyzer();
             analyzer.ExportRatingToCSV();
+        }
+
+        private void buildPGN_Click(object sender, EventArgs e) {
+            var analyzer = new Analyzer();
+         var lst=   analyzer.TestPGN();
+            treeMoves.DataSource= lst;
+            treeMoves.KeyFieldName = nameof(MyMove.Key);
+            treeMoves.ParentFieldName= nameof(MyMove.ParentKey);
         }
     }
 }

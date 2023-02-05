@@ -28,6 +28,7 @@
             this.exportRating = new DevExpress.XtraEditors.SimpleButton();
             this.buildPGN = new DevExpress.XtraEditors.SimpleButton();
             this.treeMoves = new DevExpress.XtraTreeList.TreeList();
+            this.exportTree = new DevExpress.XtraEditors.SimpleButton();
             ((System.ComponentModel.ISupportInitialize)(this.treeMoves)).BeginInit();
             this.SuspendLayout();
             // 
@@ -74,11 +75,21 @@
             this.treeMoves.Size = new System.Drawing.Size(1345, 960);
             this.treeMoves.TabIndex = 4;
             // 
+            // exportTree
+            // 
+            this.exportTree.Location = new System.Drawing.Point(578, 13);
+            this.exportTree.Name = "exportTree";
+            this.exportTree.Size = new System.Drawing.Size(112, 34);
+            this.exportTree.TabIndex = 5;
+            this.exportTree.Text = "exportTree";
+            this.exportTree.Click += new System.EventHandler(this.exportTree_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1747, 1050);
+            this.Controls.Add(this.exportTree);
             this.Controls.Add(this.treeMoves);
             this.Controls.Add(this.buildPGN);
             this.Controls.Add(this.exportRating);
@@ -98,6 +109,7 @@
         private DevExpress.XtraEditors.SimpleButton exportRating;
         private DevExpress.XtraEditors.SimpleButton buildPGN;
         private DevExpress.XtraTreeList.TreeList treeMoves;
+        private DevExpress.XtraEditors.SimpleButton exportTree;
     }
 }
 

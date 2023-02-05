@@ -2,6 +2,7 @@
 using ChessGamesParser.ChessArchive;
 using ChessGamesParser.Classes;
 using ChessGamesParser.Classes.XPOData;
+using DevExpress.Export;
 using DevExpress.Xpo;
 using ilf.pgn;
 using System;
@@ -42,6 +43,13 @@ namespace ChessAnalyzer {
             treeMoves.DataSource= lst;
             treeMoves.KeyFieldName = nameof(MyMove.Key);
             treeMoves.ParentFieldName= nameof(MyMove.ParentKey);
+            treeMoves.ExpandAll();
+        }
+
+        private void exportTree_Click(object sender, EventArgs e) {
+            
+            ExportSettings.DefaultExportType = ExportType.WYSIWYG;
+            treeMoves.ExportToXlsx("myTree.xlsx");
         }
     }
 }

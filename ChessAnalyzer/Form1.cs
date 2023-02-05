@@ -13,5 +13,9 @@ namespace ChessAnalyzer {
         public Form1() {
             InitializeComponent();
         }
+
+        private void simpleButton1_Click(object sender, EventArgs e) {
+
+        }
     }
 }

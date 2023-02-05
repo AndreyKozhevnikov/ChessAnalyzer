@@ -4,13 +4,15 @@ using DevExpress.Data.Filtering;
 using DevExpress.Xpo;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static System.Net.WebRequestMethods;
 //https://api.chess.com/pub/player/freazeek/games/2022/12
 namespace ChessGamesParser.Classes {
     public class GameImporter {
-        internal void SaveGames(RootGames? rootGames) {
+        internal void SaveGames(RootGames rootGames) {
             if(rootGames == null) {
                 return;
             }
@@ -57,8 +59,8 @@ namespace ChessGamesParser.Classes {
             uow.CommitChanges();
         }
 
-        internal void ImportGames() {
-            var folder = @"..\..\..\Data\";
+        internal void ImportGamesFromFile() {
+            var folder = @"..\..\Data\";
             var files = Directory.GetFiles(folder);
             foreach(var file in files) {
                 var parser = new JsonParser();
@@ -66,6 +68,10 @@ namespace ChessGamesParser.Classes {
                 SaveGames(games);
             }
 
+
+        }
+        public object ImportGamesFromApi() {
+            var path = "https://api.chess.com/pub/player/freazeek/games/2023/02";
 
         }
 

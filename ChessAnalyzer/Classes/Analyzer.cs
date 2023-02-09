@@ -57,39 +57,40 @@ namespace ChessGamesParser.Classes {
 
                 }
                 //  move1W.Count++;
-                Guid parentKey = Guid.Empty;
+                MyMove parentMove = new MyMove("null");
+                parentMove.Key = Guid.Empty;
                 for(int i = 1; i <= 4; i++) {
                     var moveWst = GetMove(gamePGN.MoveText, i, true)?.ToString();
                     if(moveWst == null) {
                         break;
                     }
-                    var existW = moves.Find(x => x.Name == moveWst && x.ParentKey == parentKey);
+                    var existW = moves.Find(x => x.Name == moveWst && x.ParentKey == parentMove.Key);
                     if(existW != null) {
                         existW.Count++;
                        
                     } else {
                         existW = new MyMove(moveWst);
-                        existW.ParentKey = parentKey;
+                        existW.ParentMove = parentMove;
                         existW.MoveNumber = i;
                         existW.Count++;
                         moves.Add(existW);
                     }
-                    parentKey = existW.Key;
+                    parentMove = existW;
                     var moveBst = GetMove(gamePGN.MoveText, i, false)?.ToString();
                     if(moveWst == null) {
                         break;
                     }
-                    var existB = moves.Find(x => x.Name == moveBst && x.ParentKey==parentKey);
+                    var existB = moves.Find(x => x.Name == moveBst && x.ParentKey== parentMove.Key);
                     if(existB != null) {
                         existB.Count++;
                     } else {
                         existB = new MyMove(moveBst);
-                        existB.ParentKey = existW.Key;
+                        existB.ParentMove = existW;
                         existB.MoveNumber = i;
                         existB.Count++;
                         moves.Add(existB);
                     }
-                    parentKey = existB.Key;
+                    parentMove = existB;
                 }
 
                 //var move1Bst = GetMove(gamePGN.MoveText, 1,false).ToString();

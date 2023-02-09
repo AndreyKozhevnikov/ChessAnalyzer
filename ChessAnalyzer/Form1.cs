@@ -4,7 +4,7 @@ using ChessGamesParser.Classes;
 using ChessGamesParser.Classes.XPOData;
 using DevExpress.Export;
 using DevExpress.Xpo;
-using ilf.pgn;
+
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;

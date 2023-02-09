@@ -12,10 +12,32 @@ namespace ChessAnalyzer.Classes {
         }
 
         public Guid Key { get; set; }
-        public Guid ParentKey{ get; set; }
+        MyMove parentMove;
+        public Guid ParentKey { get; private set; }
+
+        public MyMove ParentMove {
+            get => parentMove; set {
+                parentMove = value;
+                ParentKey = parentMove.Key;
+            }
+
+        }
+
+        public string FingerPrint {
+            get {
+                if(ParentMove == null) {
+                    return null;
+                } else {
+                    if(parentMove.FingerPrint == null) {
+                        return Name;
+                    }
+                    return string.Join(" ", ParentMove.FingerPrint, Name);
+                }
+            }
+        }
         public string Name { get; set; }
         public int MoveNumber { get; set; }
-        public int Count{ get; set; }
+        public int Count { get; set; }
         public List<MyMove> NextMoves { get; set; }
 
     }

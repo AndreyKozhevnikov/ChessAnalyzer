@@ -72,7 +72,7 @@
             // 
             this.treeMoves.Location = new System.Drawing.Point(38, 78);
             this.treeMoves.Name = "treeMoves";
-            this.treeMoves.Size = new System.Drawing.Size(1345, 960);
+            this.treeMoves.Size = new System.Drawing.Size(2279, 1323);
             this.treeMoves.TabIndex = 4;
             // 
             // exportTree
@@ -88,7 +88,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1747, 1050);
+            this.ClientSize = new System.Drawing.Size(2320, 1413);
             this.Controls.Add(this.exportTree);
             this.Controls.Add(this.treeMoves);
             this.Controls.Add(this.buildPGN);

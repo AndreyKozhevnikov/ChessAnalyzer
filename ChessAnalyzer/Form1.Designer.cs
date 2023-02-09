@@ -28,6 +28,10 @@
             this.exportRating = new DevExpress.XtraEditors.SimpleButton();
             this.buildPGN = new DevExpress.XtraEditors.SimpleButton();
             this.treeMoves = new DevExpress.XtraTreeList.TreeList();
+            this.NameCl = new DevExpress.XtraTreeList.Columns.TreeListColumn();
+            this.Count = new DevExpress.XtraTreeList.Columns.TreeListColumn();
+            this.FingerPrint = new DevExpress.XtraTreeList.Columns.TreeListColumn();
+            this.MoveNumber = new DevExpress.XtraTreeList.Columns.TreeListColumn();
             this.exportTree = new DevExpress.XtraEditors.SimpleButton();
             ((System.ComponentModel.ISupportInitialize)(this.treeMoves)).BeginInit();
             this.SuspendLayout();
@@ -70,10 +74,48 @@
             // 
             // treeMoves
             // 
+            this.treeMoves.Columns.AddRange(new DevExpress.XtraTreeList.Columns.TreeListColumn[] {
+            this.NameCl,
+            this.Count,
+            this.FingerPrint,
+            this.MoveNumber});
             this.treeMoves.Location = new System.Drawing.Point(38, 78);
             this.treeMoves.Name = "treeMoves";
             this.treeMoves.Size = new System.Drawing.Size(2279, 1323);
             this.treeMoves.TabIndex = 4;
+            // 
+            // NameCl
+            // 
+            this.NameCl.Caption = "Name";
+            this.NameCl.FieldName = "Name";
+            this.NameCl.Name = "NameCl";
+            this.NameCl.Visible = true;
+            this.NameCl.VisibleIndex = 0;
+            // 
+            // Count
+            // 
+            this.Count.Caption = "Count";
+            this.Count.FieldName = "Count";
+            this.Count.Name = "Count";
+            this.Count.SortOrder = System.Windows.Forms.SortOrder.Descending;
+            this.Count.Visible = true;
+            this.Count.VisibleIndex = 1;
+            // 
+            // FingerPrint
+            // 
+            this.FingerPrint.Caption = "FingerPrint";
+            this.FingerPrint.FieldName = "FingerPrint";
+            this.FingerPrint.Name = "FingerPrint";
+            this.FingerPrint.Visible = true;
+            this.FingerPrint.VisibleIndex = 3;
+            // 
+            // MoveNumber
+            // 
+            this.MoveNumber.Caption = "MoveNumber";
+            this.MoveNumber.FieldName = "MoveNumber";
+            this.MoveNumber.Name = "MoveNumber";
+            this.MoveNumber.Visible = true;
+            this.MoveNumber.VisibleIndex = 2;
             // 
             // exportTree
             // 
@@ -110,6 +152,10 @@
         private DevExpress.XtraEditors.SimpleButton buildPGN;
         private DevExpress.XtraTreeList.TreeList treeMoves;
         private DevExpress.XtraEditors.SimpleButton exportTree;
+        private DevExpress.XtraTreeList.Columns.TreeListColumn NameCl;
+        private DevExpress.XtraTreeList.Columns.TreeListColumn Count;
+        private DevExpress.XtraTreeList.Columns.TreeListColumn FingerPrint;
+        private DevExpress.XtraTreeList.Columns.TreeListColumn MoveNumber;
     }
 }
 

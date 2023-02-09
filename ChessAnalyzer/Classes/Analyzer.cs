@@ -2,6 +2,7 @@
 using ChessGamesParser.Classes.XPOData;
 using DevExpress.Data.Filtering;
 using DevExpress.Xpo;
+using DevExpress.XtraBars.Alerter;
 using ilf.pgn.Data;
 using ilf.pgn.Data.MoveText;
 using System;
@@ -36,6 +37,13 @@ namespace ChessGamesParser.Classes {
             System.IO.File.WriteAllText("mycsv.csv", csv.ToString());
         }
 
+        public List<string> GetMovesToExclude() {
+            var path = @"..\..\MovesToExclude\list.txt";
+            string text = System.IO.File.ReadAllText(path);
+            var list = text.Split(new[] { "\r\n" }, StringSplitOptions.RemoveEmptyEntries);
+            return list.ToList();
+        }
+
         public List<MyMove> TestPGN() {
             var uow = new UnitOfWork();
             var allGames = new XPCollection<GamePersist>(uow, CriteriaOperator.FromLambda<GamePersist>(x => x.WhiteName == MyName)).ToList();
@@ -45,6 +53,7 @@ namespace ChessGamesParser.Classes {
             //var move1W = new MyMove("c4");
             //move1W.MoveNumber = 1;
             //moves.Add(move1W);
+            var movesToExclude = GetMovesToExclude();
             foreach(var game in allGames) {
 
                 var reader = new ilf.pgn.PgnReader();
@@ -67,20 +76,23 @@ namespace ChessGamesParser.Classes {
                     var existW = moves.Find(x => x.Name == moveWst && x.ParentKey == parentMove.Key);
                     if(existW != null) {
                         existW.Count++;
-                       
+
                     } else {
                         existW = new MyMove(moveWst);
                         existW.ParentMove = parentMove;
+                        if(movesToExclude.Contains(existW.FingerPrint)) {
+                            break;
+                        }
                         existW.MoveNumber = i;
                         existW.Count++;
                         moves.Add(existW);
                     }
                     parentMove = existW;
                     var moveBst = GetMove(gamePGN.MoveText, i, false)?.ToString();
-                    if(moveWst == null) {
+                    if(moveBst == null) {
                         break;
                     }
-                    var existB = moves.Find(x => x.Name == moveBst && x.ParentKey== parentMove.Key);
+                    var existB = moves.Find(x => x.Name == moveBst && x.ParentKey == parentMove.Key);
                     if(existB != null) {
                         existB.Count++;
                     } else {
@@ -143,8 +155,8 @@ namespace ChessGamesParser.Classes {
             }
             return false;
         }
-        HalfMoveEntry GetMove(MoveTextEntryList moves, int number,bool firstMove) {
-            return (HalfMoveEntry)moves.Where(x => x.Type == MoveTextEntryType.SingleMove && ((HalfMoveEntry)x).MoveNumber == number && ((HalfMoveEntry)x).IsContinued==!firstMove).FirstOrDefault();
+        HalfMoveEntry GetMove(MoveTextEntryList moves, int number, bool firstMove) {
+            return (HalfMoveEntry)moves.Where(x => x.Type == MoveTextEntryType.SingleMove && ((HalfMoveEntry)x).MoveNumber == number && ((HalfMoveEntry)x).IsContinued == !firstMove).FirstOrDefault();
         }
 
     }

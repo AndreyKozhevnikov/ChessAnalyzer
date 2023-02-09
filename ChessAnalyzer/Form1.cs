@@ -43,7 +43,7 @@ namespace ChessAnalyzer {
             treeMoves.DataSource= lst;
             treeMoves.KeyFieldName = nameof(MyMove.Key);
             treeMoves.ParentFieldName= nameof(MyMove.ParentKey);
-            treeMoves.ExpandAll();
+           // treeMoves.ExpandAll();
         }
 
         private void exportTree_Click(object sender, EventArgs e) {

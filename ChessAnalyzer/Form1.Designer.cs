@@ -1,4 +1,6 @@
-﻿namespace ChessAnalyzer {
+﻿using DevExpress.XtraTab;
+
+namespace ChessAnalyzer {
     partial class Form1 {
         /// <summary>
         /// Required designer variable.
@@ -32,9 +34,19 @@
             this.Count = new DevExpress.XtraTreeList.Columns.TreeListColumn();
             this.FingerPrint = new DevExpress.XtraTreeList.Columns.TreeListColumn();
             this.MoveNumber = new DevExpress.XtraTreeList.Columns.TreeListColumn();
-            this.exportTree = new DevExpress.XtraEditors.SimpleButton();
             this.treeListColumn1 = new DevExpress.XtraTreeList.Columns.TreeListColumn();
+            this.exportTree = new DevExpress.XtraEditors.SimpleButton();
+            this.xtraTabControl1 = new DevExpress.XtraTab.XtraTabControl();
+            this.xtraTabPage1 = new DevExpress.XtraTab.XtraTabPage();
+            this.xtraTabPage2 = new DevExpress.XtraTab.XtraTabPage();
+            this.simpleButton1 = new DevExpress.XtraEditors.SimpleButton();
+            this.ratingChart = new DevExpress.XtraCharts.ChartControl();
             ((System.ComponentModel.ISupportInitialize)(this.treeMoves)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.xtraTabControl1)).BeginInit();
+            this.xtraTabControl1.SuspendLayout();
+            this.xtraTabPage1.SuspendLayout();
+            this.xtraTabPage2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.ratingChart)).BeginInit();
             this.SuspendLayout();
             // 
             // importDataFromFileBtn
@@ -81,9 +93,10 @@
             this.FingerPrint,
             this.MoveNumber,
             this.treeListColumn1});
-            this.treeMoves.Location = new System.Drawing.Point(38, 78);
+            this.treeMoves.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.treeMoves.Location = new System.Drawing.Point(0, 0);
             this.treeMoves.Name = "treeMoves";
-            this.treeMoves.Size = new System.Drawing.Size(2279, 1323);
+            this.treeMoves.Size = new System.Drawing.Size(2600, 1399);
             this.treeMoves.TabIndex = 4;
             this.treeMoves.CustomUnboundColumnData += new DevExpress.XtraTreeList.CustomColumnDataEventHandler(this.treeMoves_CustomUnboundColumnData);
             // 
@@ -120,15 +133,6 @@
             this.MoveNumber.Visible = true;
             this.MoveNumber.VisibleIndex = 2;
             // 
-            // exportTree
-            // 
-            this.exportTree.Location = new System.Drawing.Point(578, 13);
-            this.exportTree.Name = "exportTree";
-            this.exportTree.Size = new System.Drawing.Size(112, 34);
-            this.exportTree.TabIndex = 5;
-            this.exportTree.Text = "exportTree";
-            this.exportTree.Click += new System.EventHandler(this.exportTree_Click);
-            // 
             // treeListColumn1
             // 
             this.treeListColumn1.Caption = "Answer";
@@ -138,13 +142,66 @@
             this.treeListColumn1.Visible = true;
             this.treeListColumn1.VisibleIndex = 4;
             // 
+            // exportTree
+            // 
+            this.exportTree.Location = new System.Drawing.Point(578, 13);
+            this.exportTree.Name = "exportTree";
+            this.exportTree.Size = new System.Drawing.Size(112, 34);
+            this.exportTree.TabIndex = 5;
+            this.exportTree.Text = "exportTree";
+            this.exportTree.Click += new System.EventHandler(this.exportTree_Click);
+            // 
+            // xtraTabControl1
+            // 
+            this.xtraTabControl1.Location = new System.Drawing.Point(3, 53);
+            this.xtraTabControl1.Name = "xtraTabControl1";
+            this.xtraTabControl1.SelectedTabPage = this.xtraTabPage1;
+            this.xtraTabControl1.Size = new System.Drawing.Size(2602, 1434);
+            this.xtraTabControl1.TabIndex = 6;
+            this.xtraTabControl1.TabPages.AddRange(new DevExpress.XtraTab.XtraTabPage[] {
+            this.xtraTabPage1,
+            this.xtraTabPage2});
+            // 
+            // xtraTabPage1
+            // 
+            this.xtraTabPage1.Controls.Add(this.treeMoves);
+            this.xtraTabPage1.Name = "xtraTabPage1";
+            this.xtraTabPage1.Size = new System.Drawing.Size(2600, 1399);
+            this.xtraTabPage1.Text = "Data";
+            // 
+            // xtraTabPage2
+            // 
+            this.xtraTabPage2.Controls.Add(this.ratingChart);
+            this.xtraTabPage2.Name = "xtraTabPage2";
+            this.xtraTabPage2.Size = new System.Drawing.Size(2600, 1399);
+            this.xtraTabPage2.Text = "Chart";
+            // 
+            // simpleButton1
+            // 
+            this.simpleButton1.Location = new System.Drawing.Point(710, 13);
+            this.simpleButton1.Name = "simpleButton1";
+            this.simpleButton1.Size = new System.Drawing.Size(112, 34);
+            this.simpleButton1.TabIndex = 7;
+            this.simpleButton1.Text = "ShowRating";
+            this.simpleButton1.Click += new System.EventHandler(this.simpleButton1_Click);
+            // 
+            // ratingChart
+            // 
+            this.ratingChart.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.ratingChart.Location = new System.Drawing.Point(0, 0);
+            this.ratingChart.Name = "ratingChart";
+            this.ratingChart.SeriesSerializable = new DevExpress.XtraCharts.Series[0];
+            this.ratingChart.Size = new System.Drawing.Size(2600, 1399);
+            this.ratingChart.TabIndex = 0;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(2320, 1413);
+            this.ClientSize = new System.Drawing.Size(2608, 1492);
+            this.Controls.Add(this.simpleButton1);
+            this.Controls.Add(this.xtraTabControl1);
             this.Controls.Add(this.exportTree);
-            this.Controls.Add(this.treeMoves);
             this.Controls.Add(this.buildPGN);
             this.Controls.Add(this.exportRating);
             this.Controls.Add(this.importFromApi);
@@ -152,6 +209,11 @@
             this.Name = "Form1";
             this.Text = "Form1";
             ((System.ComponentModel.ISupportInitialize)(this.treeMoves)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.xtraTabControl1)).EndInit();
+            this.xtraTabControl1.ResumeLayout(false);
+            this.xtraTabPage1.ResumeLayout(false);
+            this.xtraTabPage2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.ratingChart)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -169,6 +231,11 @@
         private DevExpress.XtraTreeList.Columns.TreeListColumn FingerPrint;
         private DevExpress.XtraTreeList.Columns.TreeListColumn MoveNumber;
         private DevExpress.XtraTreeList.Columns.TreeListColumn treeListColumn1;
+        private XtraTabControl xtraTabControl1;
+        private XtraTabPage xtraTabPage1;
+        private XtraTabPage xtraTabPage2;
+        private DevExpress.XtraEditors.SimpleButton simpleButton1;
+        private DevExpress.XtraCharts.ChartControl ratingChart;
     }
 }
 

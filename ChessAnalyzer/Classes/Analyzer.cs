@@ -19,22 +19,47 @@ namespace ChessGamesParser.Classes {
     internal class Analyzer {
         public const string MyName = "freazeek";
         public void ExportRatingToCSV() {
-            var uow = new UnitOfWork();
-            var allGames = new XPCollection<GamePersist>(uow).ToList().OrderBy(x => x.Date);
-            var csv = new StringBuilder();
-            foreach(var game in allGames) {
-                var date = game.Date;
-                int rating;
-                if(game.WhiteName == MyName) {
-                    rating = game.WhiteRating;
-                } else {
-                    rating = game.BlackRating;
-                }
-                var newLine = string.Format("{0},{1}", date, rating);
-                csv.AppendLine(newLine);
+            using(var uow = new UnitOfWork()) {
+                var allGames = new XPCollection<GamePersist>(uow).ToList().OrderBy(x => x.Date);
+                var csv = new StringBuilder();
+                foreach(var game in allGames) {
+                    var date = game.Date;
+                    int rating;
+                    if(game.WhiteName == MyName) {
+                        rating = game.WhiteRating;
+                    } else {
+                        rating = game.BlackRating;
+                    }
+                    var newLine = string.Format("{0},{1}", date, rating);
+                    csv.AppendLine(newLine);
 
+                }
+                System.IO.File.WriteAllText("mycsv.csv", csv.ToString());
             }
-            System.IO.File.WriteAllText("mycsv.csv", csv.ToString());
+        }
+
+        public List<RatingData> GetRating() {
+            var res = new List<RatingData>();
+            using(var uow = new UnitOfWork()) {
+                var allGames = new XPCollection<GamePersist>(uow).ToList().OrderBy(x => x.Date);
+
+
+               
+
+                var csv = new StringBuilder();
+                foreach(var game in allGames) {
+                    var dt = new RatingData();
+                    dt.Date = game.Date;
+                    if(game.WhiteName == MyName) {
+                        dt.Rating = game.WhiteRating;
+                    } else {
+                        dt.Rating = game.BlackRating;
+                    }
+                    res.Add(dt);
+                }
+              
+            }
+            return res;
         }
 
         public List<CorrectAnswer> GetCorrectAnswers(UnitOfWork uow) {

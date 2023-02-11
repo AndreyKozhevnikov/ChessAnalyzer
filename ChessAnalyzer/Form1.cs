@@ -5,7 +5,8 @@ using ChessGamesParser.Classes.XPOData;
 using DevExpress.Data.Filtering;
 using DevExpress.Export;
 using DevExpress.Xpo;
-
+using DevExpress.XtraCharts;
+using DevExpress.XtraCharts.Native;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -77,7 +78,7 @@ namespace ChessAnalyzer {
                     answer = "!!!!!!!!!!!!!!!!!!!!!";
                 }
                 e.Value = answer;
-                
+
             }
             if(e.IsSetData) {
                 var correctAnswer = uow.FindObject<CorrectAnswer>(CriteriaOperator.FromLambda<CorrectAnswer>(x => x.FingerPrint == move.FingerPrint));
@@ -89,6 +90,20 @@ namespace ChessAnalyzer {
                 correctMovesDict[correctAnswer.FingerPrint] = correctAnswer.Answer;
                 uow.CommitChanges();
             }
+        }
+
+        private void simpleButton1_Click(object sender, EventArgs e) {
+            var analyzer = new Analyzer();
+            var lst = analyzer.GetRating();
+            ratingChart.DataSource = lst;
+            var minValue = lst.Min(x => x.Rating);
+            Series series = new Series("Series1", ViewType.Line);
+            series.View.Color = Color.Green;
+            ratingChart.Series.Add(series);
+            series.ArgumentDataMember = "Date";
+            series.ValueDataMembers.AddRange(new string[] { "Rating" });
+            series.ArgumentScaleType = ScaleType.Qualitative;
+            ((XYDiagram)ratingChart.Diagram).AxisY.VisualRange.MinValue = minValue;
         }
     }
 }

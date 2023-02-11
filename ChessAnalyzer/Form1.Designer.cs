@@ -33,6 +33,7 @@
             this.FingerPrint = new DevExpress.XtraTreeList.Columns.TreeListColumn();
             this.MoveNumber = new DevExpress.XtraTreeList.Columns.TreeListColumn();
             this.exportTree = new DevExpress.XtraEditors.SimpleButton();
+            this.treeListColumn1 = new DevExpress.XtraTreeList.Columns.TreeListColumn();
             ((System.ComponentModel.ISupportInitialize)(this.treeMoves)).BeginInit();
             this.SuspendLayout();
             // 
@@ -78,11 +79,13 @@
             this.NameCl,
             this.Count,
             this.FingerPrint,
-            this.MoveNumber});
+            this.MoveNumber,
+            this.treeListColumn1});
             this.treeMoves.Location = new System.Drawing.Point(38, 78);
             this.treeMoves.Name = "treeMoves";
             this.treeMoves.Size = new System.Drawing.Size(2279, 1323);
             this.treeMoves.TabIndex = 4;
+            this.treeMoves.CustomUnboundColumnData += new DevExpress.XtraTreeList.CustomColumnDataEventHandler(this.treeMoves_CustomUnboundColumnData);
             // 
             // NameCl
             // 
@@ -126,6 +129,15 @@
             this.exportTree.Text = "exportTree";
             this.exportTree.Click += new System.EventHandler(this.exportTree_Click);
             // 
+            // treeListColumn1
+            // 
+            this.treeListColumn1.Caption = "Answer";
+            this.treeListColumn1.FieldName = "Answer";
+            this.treeListColumn1.Name = "treeListColumn1";
+            this.treeListColumn1.UnboundDataType = typeof(string);
+            this.treeListColumn1.Visible = true;
+            this.treeListColumn1.VisibleIndex = 4;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
@@ -156,6 +168,7 @@
         private DevExpress.XtraTreeList.Columns.TreeListColumn Count;
         private DevExpress.XtraTreeList.Columns.TreeListColumn FingerPrint;
         private DevExpress.XtraTreeList.Columns.TreeListColumn MoveNumber;
+        private DevExpress.XtraTreeList.Columns.TreeListColumn treeListColumn1;
     }
 }
 

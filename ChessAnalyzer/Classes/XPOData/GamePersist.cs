@@ -4,6 +4,30 @@ using System;
 using System.Linq;
 
 namespace ChessGamesParser.Classes.XPOData {
+
+    public class CorrectAnswer : XPObject {
+
+        public CorrectAnswer(Session sesion):base(sesion) { }
+
+        string answer;
+        string fingerPring;
+
+
+        public string FingerPrint {
+            get => fingerPring;
+            set => SetPropertyValue(nameof(FingerPrint), ref fingerPring, value);
+        }
+        
+
+        public string Answer {
+            get => answer;
+            set => SetPropertyValue(nameof(Answer), ref answer, value);
+        }
+
+    }
+
+
+
     public class GamePersist : XPObject {
         double accuracyBlack;
         double accuracyWhite;

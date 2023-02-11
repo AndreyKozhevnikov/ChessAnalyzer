@@ -39,6 +39,7 @@ namespace ChessAnalyzer.Classes {
         public int MoveNumber { get; set; }
         public int Count { get; set; }
         public List<MyMove> NextMoves { get; set; }
+        public bool IsWhite { get; set; }
 
     }
 }

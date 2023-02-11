@@ -37,11 +37,9 @@ namespace ChessGamesParser.Classes {
             System.IO.File.WriteAllText("mycsv.csv", csv.ToString());
         }
 
-        public List<string> GetMovesToExclude() {
-            var path = @"..\..\MovesToExclude\list.txt";
-            string text = System.IO.File.ReadAllText(path);
-            var list = text.Split(new[] { "\r\n" }, StringSplitOptions.RemoveEmptyEntries);
-            return list.ToList();
+        public List<CorrectAnswer> GetCorrectAnswers(UnitOfWork uow) {
+            var lst = new XPCollection<CorrectAnswer>(uow).ToList();
+            return lst;
         }
 
         public List<MyMove> TestPGN() {
@@ -53,7 +51,7 @@ namespace ChessGamesParser.Classes {
             //var move1W = new MyMove("c4");
             //move1W.MoveNumber = 1;
             //moves.Add(move1W);
-            var movesToExclude = GetMovesToExclude();
+            var correctAnswers = GetCorrectAnswers(uow);
             foreach(var game in allGames) {
 
                 var reader = new ilf.pgn.PgnReader();
@@ -79,10 +77,16 @@ namespace ChessGamesParser.Classes {
 
                     } else {
                         existW = new MyMove(moveWst);
+                        existW.IsWhite = true;
                         existW.ParentMove = parentMove;
-                        if(movesToExclude.Contains(existW.FingerPrint)) {
+                        var correctAnswerForWhite = correctAnswers.Find(x => x.FingerPrint == parentMove.FingerPrint);
+                        if(i > 1 && (correctAnswerForWhite == null || existW.Name != correctAnswerForWhite.Answer)) {
                             break;
                         }
+
+                        //if(movesToExclude.Contains(existW.FingerPrint)) {
+                        //    break;
+                        //}
                         existW.MoveNumber = i;
                         existW.Count++;
                         moves.Add(existW);

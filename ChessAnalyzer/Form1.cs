@@ -42,14 +42,18 @@ namespace ChessAnalyzer {
             analyzer.ExportRatingToCSV();
         }
 
-        private void buildPGN_Click(object sender, EventArgs e) {
+        void BuldPGNGrid(bool showAllMoves) {
             var analyzer = new Analyzer();
             correctMovesDict.Clear();
-            var lst = analyzer.TestPGN();
+            var lst = analyzer.TestPGN(showAllMoves);
             treeMoves.DataSource = lst;
             treeMoves.KeyFieldName = nameof(MyMove.Key);
             treeMoves.ParentFieldName = nameof(MyMove.ParentKey);
-            // treeMoves.ExpandAll();
+            treeMoves.ExpandAll();
+        }
+
+        private void buildPGN_Click(object sender, EventArgs e) {
+            BuldPGNGrid(false);
         }
 
         private void exportTree_Click(object sender, EventArgs e) {
@@ -104,6 +108,10 @@ namespace ChessAnalyzer {
             series.ValueDataMembers.AddRange(new string[] { "Rating" });
             series.ArgumentScaleType = ScaleType.Qualitative;
             ((XYDiagram)ratingChart.Diagram).AxisY.VisualRange.MinValue = minValue;
+        }
+
+        private void bulidPgnFull_Click(object sender, EventArgs e) {
+            BuldPGNGrid(true);
         }
     }
 }

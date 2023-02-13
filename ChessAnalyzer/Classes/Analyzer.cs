@@ -44,7 +44,7 @@ namespace ChessGamesParser.Classes {
                 var allGames = new XPCollection<GamePersist>(uow).ToList().OrderBy(x => x.Date);
 
 
-               
+
 
                 var csv = new StringBuilder();
                 foreach(var game in allGames) {
@@ -57,7 +57,7 @@ namespace ChessGamesParser.Classes {
                     }
                     res.Add(dt);
                 }
-              
+
             }
             return res;
         }
@@ -67,7 +67,7 @@ namespace ChessGamesParser.Classes {
             return lst;
         }
 
-        public List<MyMove> TestPGN() {
+        public List<MyMove> TestPGN(bool showAllMoves = false) {
             var uow = new UnitOfWork();
             var allGames = new XPCollection<GamePersist>(uow, CriteriaOperator.FromLambda<GamePersist>(x => x.WhiteName == MyName)).ToList();
             var csv = new StringBuilder();
@@ -91,7 +91,7 @@ namespace ChessGamesParser.Classes {
                 //  move1W.Count++;
                 MyMove parentMove = new MyMove("null");
                 parentMove.Key = Guid.Empty;
-                for(int i = 1; i <= 4; i++) {
+                for(int i = 1; i <= 5; i++) {
                     var moveWst = GetMove(gamePGN.MoveText, i, true)?.ToString();
                     if(moveWst == null) {
                         break;
@@ -105,7 +105,7 @@ namespace ChessGamesParser.Classes {
                         existW.IsWhite = true;
                         existW.ParentMove = parentMove;
                         var correctAnswerForWhite = correctAnswers.Find(x => x.FingerPrint == parentMove.FingerPrint);
-                        if(i > 1 && (correctAnswerForWhite == null || existW.Name != correctAnswerForWhite.Answer)) {
+                        if(!showAllMoves && i > 1 && (correctAnswerForWhite == null || existW.Name != correctAnswerForWhite.Answer)) {
                             break;
                         }
 
@@ -175,6 +175,15 @@ namespace ChessGamesParser.Classes {
 
             }
             //  MessageBox.Show(cnt.ToString());
+            if(!showAllMoves) {
+                for(int i = moves.Count - 1; i >= 0; i--) {
+                    var mv = moves[i];
+                    if(mv.Count < 2) {
+                        moves.Remove(mv);
+                    }
+                }
+            }
+
             return moves;
         }
 

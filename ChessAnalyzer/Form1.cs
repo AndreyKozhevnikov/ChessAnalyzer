@@ -23,8 +23,19 @@ namespace ChessAnalyzer {
             InitializeComponent();
             ConnectionHelper.Connect(DevExpress.Xpo.DB.AutoCreateOption.DatabaseAndSchema);
             uow = new UnitOfWork();
+            treeMoves.NodeCellStyle += TreeMoves_NodeCellStyle;
             //var a = new CorrectAnswer(uow);
             //uow.CommitChanges();
+        }
+
+        private void TreeMoves_NodeCellStyle(object sender, DevExpress.XtraTreeList.GetCustomNodeCellStyleEventArgs e) {
+            if(e.Column.Name != "AnswerCl")
+                return;
+            var nd = e.Node;
+            var cnt=(int)nd.GetValue("Count");
+            if(cnt > 9 && !nd.HasChildren) {
+                e.Appearance.BackColor = Color.Red;
+            }
         }
 
         private void importDataFromFileBtn_Click(object sender, EventArgs e) {

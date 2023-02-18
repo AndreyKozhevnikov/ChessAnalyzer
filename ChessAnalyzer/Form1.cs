@@ -108,6 +108,11 @@ namespace ChessAnalyzer {
             series.ValueDataMembers.AddRange(new string[] { "Rating" });
             series.ArgumentScaleType = ScaleType.Qualitative;
             ((XYDiagram)ratingChart.Diagram).AxisY.VisualRange.MinValue = minValue;
+            ((XYDiagram)ratingChart.Diagram).EnableAxisXZooming= true;
+            ((XYDiagram)ratingChart.Diagram).EnableAxisYZooming= true;
+            ((XYDiagram)ratingChart.Diagram).EnableAxisXScrolling = true;
+            ((XYDiagram)ratingChart.Diagram).EnableAxisYScrolling = true;
+
         }
 
         private void bulidPgnFull_Click(object sender, EventArgs e) {

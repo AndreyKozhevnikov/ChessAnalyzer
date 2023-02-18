@@ -34,13 +34,13 @@ namespace ChessAnalyzer {
             this.Count = new DevExpress.XtraTreeList.Columns.TreeListColumn();
             this.FingerPrint = new DevExpress.XtraTreeList.Columns.TreeListColumn();
             this.MoveNumber = new DevExpress.XtraTreeList.Columns.TreeListColumn();
-            this.treeListColumn1 = new DevExpress.XtraTreeList.Columns.TreeListColumn();
+            this.AnswerCl = new DevExpress.XtraTreeList.Columns.TreeListColumn();
             this.exportTree = new DevExpress.XtraEditors.SimpleButton();
             this.xtraTabControl1 = new DevExpress.XtraTab.XtraTabControl();
             this.xtraTabPage1 = new DevExpress.XtraTab.XtraTabPage();
             this.xtraTabPage2 = new DevExpress.XtraTab.XtraTabPage();
-            this.simpleButton1 = new DevExpress.XtraEditors.SimpleButton();
             this.ratingChart = new DevExpress.XtraCharts.ChartControl();
+            this.simpleButton1 = new DevExpress.XtraEditors.SimpleButton();
             this.bulidPgnFull = new DevExpress.XtraEditors.SimpleButton();
             ((System.ComponentModel.ISupportInitialize)(this.treeMoves)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.xtraTabControl1)).BeginInit();
@@ -93,7 +93,7 @@ namespace ChessAnalyzer {
             this.Count,
             this.FingerPrint,
             this.MoveNumber,
-            this.treeListColumn1});
+            this.AnswerCl});
             this.treeMoves.Dock = System.Windows.Forms.DockStyle.Fill;
             this.treeMoves.Location = new System.Drawing.Point(0, 0);
             this.treeMoves.Name = "treeMoves";
@@ -134,14 +134,14 @@ namespace ChessAnalyzer {
             this.MoveNumber.Visible = true;
             this.MoveNumber.VisibleIndex = 2;
             // 
-            // treeListColumn1
+            // AnswerCl
             // 
-            this.treeListColumn1.Caption = "Answer";
-            this.treeListColumn1.FieldName = "Answer";
-            this.treeListColumn1.Name = "treeListColumn1";
-            this.treeListColumn1.UnboundDataType = typeof(string);
-            this.treeListColumn1.Visible = true;
-            this.treeListColumn1.VisibleIndex = 4;
+            this.AnswerCl.Caption = "Answer";
+            this.AnswerCl.FieldName = "Answer";
+            this.AnswerCl.Name = "AnswerCl";
+            this.AnswerCl.UnboundDataType = typeof(string);
+            this.AnswerCl.Visible = true;
+            this.AnswerCl.VisibleIndex = 4;
             // 
             // exportTree
             // 
@@ -177,15 +177,6 @@ namespace ChessAnalyzer {
             this.xtraTabPage2.Size = new System.Drawing.Size(2600, 1399);
             this.xtraTabPage2.Text = "Chart";
             // 
-            // simpleButton1
-            // 
-            this.simpleButton1.Location = new System.Drawing.Point(980, 13);
-            this.simpleButton1.Name = "simpleButton1";
-            this.simpleButton1.Size = new System.Drawing.Size(112, 34);
-            this.simpleButton1.TabIndex = 7;
-            this.simpleButton1.Text = "ShowRating";
-            this.simpleButton1.Click += new System.EventHandler(this.simpleButton1_Click);
-            // 
             // ratingChart
             // 
             this.ratingChart.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -194,6 +185,15 @@ namespace ChessAnalyzer {
             this.ratingChart.SeriesSerializable = new DevExpress.XtraCharts.Series[0];
             this.ratingChart.Size = new System.Drawing.Size(2600, 1399);
             this.ratingChart.TabIndex = 0;
+            // 
+            // simpleButton1
+            // 
+            this.simpleButton1.Location = new System.Drawing.Point(980, 13);
+            this.simpleButton1.Name = "simpleButton1";
+            this.simpleButton1.Size = new System.Drawing.Size(112, 34);
+            this.simpleButton1.TabIndex = 7;
+            this.simpleButton1.Text = "ShowRating";
+            this.simpleButton1.Click += new System.EventHandler(this.simpleButton1_Click);
             // 
             // bulidPgnFull
             // 
@@ -241,7 +241,7 @@ namespace ChessAnalyzer {
         private DevExpress.XtraTreeList.Columns.TreeListColumn Count;
         private DevExpress.XtraTreeList.Columns.TreeListColumn FingerPrint;
         private DevExpress.XtraTreeList.Columns.TreeListColumn MoveNumber;
-        private DevExpress.XtraTreeList.Columns.TreeListColumn treeListColumn1;
+        private DevExpress.XtraTreeList.Columns.TreeListColumn AnswerCl;
         private XtraTabControl xtraTabControl1;
         private XtraTabPage xtraTabPage1;
         private XtraTabPage xtraTabPage2;

@@ -76,7 +76,7 @@ namespace ChessGamesParser.Classes {
 
         }
         public async void ImportGamesFromApi() {
-            var path = "https://api.chess.com/pub/player/freazeek/games/2023/02";
+            var path = "https://api.chess.com/pub/player/freazeek/games/2023/03";
             HttpClient client = new HttpClient();
             HttpResponseMessage response = await client.GetAsync(path);
             var jsonString= response.Content.ReadAsStringAsync().Result;

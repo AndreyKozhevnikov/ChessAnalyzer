@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace ChessAnalyzer.Classes {
+    [DebuggerDisplay("{Name} - {FingerPrint}")]
     public class MyMove {
         public MyMove(string _name) {
             Name = _name;

@@ -91,7 +91,7 @@ namespace ChessGamesParser.Classes {
                 //  move1W.Count++;
                 MyMove parentMove = new MyMove("null");
                 parentMove.Key = Guid.Empty;
-                for(int i = 1; i <= 5; i++) {
+                for(int i = 1; i <= 6; i++) {
                     var moveWst = GetMove(gamePGN.MoveText, i, true)?.ToString();
                     if(moveWst == null) {
                         break;

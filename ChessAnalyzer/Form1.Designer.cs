@@ -193,7 +193,7 @@ namespace ChessAnalyzer {
             this.simpleButton1.Size = new System.Drawing.Size(112, 34);
             this.simpleButton1.TabIndex = 7;
             this.simpleButton1.Text = "ShowRating";
-            this.simpleButton1.Click += new System.EventHandler(this.simpleButton1_Click);
+            this.simpleButton1.Click += new System.EventHandler(this.buildRatingButton1_Click);
             // 
             // bulidPgnFull
             // 

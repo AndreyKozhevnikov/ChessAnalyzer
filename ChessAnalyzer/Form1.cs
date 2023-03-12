@@ -107,17 +107,64 @@ namespace ChessAnalyzer {
             }
         }
 
-        private void simpleButton1_Click(object sender, EventArgs e) {
+        private void buildRatingButton1_Click(object sender, EventArgs e) {
             var analyzer = new Analyzer();
             var lst = analyzer.GetRating();
-            ratingChart.DataSource = lst;
-            var minValue = lst.Min(x => x.Rating);
-            Series series = new Series("Series1", ViewType.Line);
+            ratingChart.DataSource = lst.RatingData;
+            var minValue = lst.RatingData. Min(x => x.Rating);
+            
+            
+            Series series = new Series("Rating", ViewType.Line);
             series.View.Color = Color.Green;
             ratingChart.Series.Add(series);
             series.ArgumentDataMember = "Date";
             series.ValueDataMembers.AddRange(new string[] { "Rating" });
             series.ArgumentScaleType = ScaleType.Qualitative;
+
+            Series maxRatingSeries = new Series("MaxRating", ViewType.Line);
+            maxRatingSeries.View.Color = Color.Blue;
+            ratingChart.Series.Add(maxRatingSeries);
+            maxRatingSeries.ArgumentDataMember = "Date";
+            maxRatingSeries.ValueDataMembers.AddRange(new string[] { "MaxRating" });
+            maxRatingSeries.ArgumentScaleType = ScaleType.Qualitative;
+
+            var secAccs = new SecondaryAxisY("Second");
+            ((XYDiagram)ratingChart.Diagram).SecondaryAxesY.Add(secAccs);
+
+            Series maxWinSeries = new Series("MaxWinSeries", ViewType.Line);
+            maxWinSeries.View.Color = Color.Red;
+            ratingChart.Series.Add(maxWinSeries);
+            maxWinSeries.ArgumentDataMember = "Date";
+            maxWinSeries.ValueDataMembers.AddRange(new string[] { "MaxWinSeries" });
+            maxWinSeries.ArgumentScaleType = ScaleType.Qualitative;
+            ((XYDiagramSeriesViewBase)maxWinSeries.View).AxisY = secAccs;
+
+
+            Series currWinSeries = new Series("CurrWinSeries", ViewType.Line);
+            currWinSeries.View.Color = Color.Purple;
+            ratingChart.Series.Add(currWinSeries);
+            currWinSeries.ArgumentDataMember = "Date";
+            currWinSeries.ValueDataMembers.AddRange(new string[] { "CurrentWinSeries" });
+            currWinSeries.ArgumentScaleType = ScaleType.Qualitative;
+            ((XYDiagramSeriesViewBase)currWinSeries.View).AxisY = secAccs;
+
+            Series maxDrawSeries = new Series("maxDrawSeries", ViewType.Line);
+            maxDrawSeries.View.Color = Color.Purple;
+            ratingChart.Series.Add(maxDrawSeries);
+            maxDrawSeries.ArgumentDataMember = "Date";
+            maxDrawSeries.ValueDataMembers.AddRange(new string[] { "MaxDrawDown" });
+            maxDrawSeries.ArgumentScaleType = ScaleType.Qualitative;
+            ((XYDiagramSeriesViewBase)maxDrawSeries.View).AxisY = secAccs;
+
+            Series currDrawSeries = new Series("currDrawSeries", ViewType.Line);
+            currDrawSeries.View.Color = Color.Red;
+            ratingChart.Series.Add(currDrawSeries);
+            currDrawSeries.ArgumentDataMember = "Date";
+            currDrawSeries.ValueDataMembers.AddRange(new string[] { "CurrentDrawDown" });
+            currDrawSeries.ArgumentScaleType = ScaleType.Qualitative;
+            ((XYDiagramSeriesViewBase)currDrawSeries.View).AxisY = secAccs;
+
+
             ((XYDiagram)ratingChart.Diagram).AxisY.VisualRange.MinValue = minValue;
             ((XYDiagram)ratingChart.Diagram).EnableAxisXZooming= true;
             ((XYDiagram)ratingChart.Diagram).EnableAxisYZooming= true;

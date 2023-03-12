@@ -19,13 +19,13 @@ namespace ChessGamesParser.Classes {
     internal class Analyzer {
         public const string MyName = "freazeek";
         public void ExportRatingToCSV() {
-            using(var uow = new UnitOfWork()) {
+            using (var uow = new UnitOfWork()) {
                 var allGames = new XPCollection<GamePersist>(uow).ToList().OrderBy(x => x.Date);
                 var csv = new StringBuilder();
-                foreach(var game in allGames) {
+                foreach (var game in allGames) {
                     var date = game.Date;
                     int rating;
-                    if(game.WhiteName == MyName) {
+                    if (game.WhiteName == MyName) {
                         rating = game.WhiteRating;
                     } else {
                         rating = game.BlackRating;
@@ -38,24 +38,56 @@ namespace ChessGamesParser.Classes {
             }
         }
 
-        public List<RatingData> GetRating() {
-            var res = new List<RatingData>();
-            using(var uow = new UnitOfWork()) {
+        public Rating GetRating() {
+            var res = new Rating();
+
+            using (var uow = new UnitOfWork()) {
                 var allGames = new XPCollection<GamePersist>(uow).ToList().OrderBy(x => x.Date);
-
-
-
-
                 var csv = new StringBuilder();
-                foreach(var game in allGames) {
+
+                int prevRating = 0;
+                int winSeries = 0;
+               
+                foreach (var game in allGames) {
                     var dt = new RatingData();
                     dt.Date = game.Date;
-                    if(game.WhiteName == MyName) {
+                    if (game.WhiteName == MyName) {
                         dt.Rating = game.WhiteRating;
                     } else {
                         dt.Rating = game.BlackRating;
                     }
-                    res.Add(dt);
+                  
+                    if (dt.Rating > res.MaxRating) {
+                        res.MaxRating = dt.Rating;
+                    }
+                    if (dt.Rating < res.MinRating) {
+                        res.MinRating = dt.Rating;
+                    }
+                   
+                    if (dt.Rating >= prevRating) {
+                        winSeries++;
+                    } else {
+                        winSeries = 0;
+                    }
+                    if (res.MaxWinSeries < winSeries) {
+                        res.MaxWinSeries = winSeries;
+                    }
+
+                    if (res.MaxRating > dt.Rating && dt.Date>new DateTime(2023,1,1)) {
+                        dt.CurrentDrawDown = res.MaxRating - dt.Rating;
+                    } else {
+                        dt.CurrentDrawDown = 0;
+                    }
+                    if (dt.CurrentDrawDown > res.MaxDrawDown) {
+                        res.MaxDrawDown = dt.CurrentDrawDown;
+                    }
+                    dt.MaxDrawDown = res.MaxDrawDown;
+                    prevRating = dt.Rating;
+                    dt.MinRating = res.MinRating;
+                    dt.MaxRating = res.MaxRating;
+                    dt.MaxWinSeries = res.MaxWinSeries;
+                    dt.CurrentWinSeries= winSeries;
+                    res.RatingData.Add(dt);
                 }
 
             }
@@ -77,27 +109,27 @@ namespace ChessGamesParser.Classes {
             //move1W.MoveNumber = 1;
             //moves.Add(move1W);
             var correctAnswers = GetCorrectAnswers(uow);
-            foreach(var game in allGames) {
+            foreach (var game in allGames) {
 
                 var reader = new ilf.pgn.PgnReader();
                 var gameDb = reader.ReadFromString(game.PGN);
 
                 Game gamePGN = gameDb.Games[0];
                 var firstMove = (HalfMoveEntry)gamePGN.MoveText[0];
-                if(!IsEnglishOpening(firstMove)) {
+                if (!IsEnglishOpening(firstMove)) {
                     continue;
 
                 }
                 //  move1W.Count++;
                 MyMove parentMove = new MyMove("null");
                 parentMove.Key = Guid.Empty;
-                for(int i = 1; i <= 6; i++) {
+                for (int i = 1; i <= 6; i++) {
                     var moveWst = GetMove(gamePGN.MoveText, i, true)?.ToString();
-                    if(moveWst == null) {
+                    if (moveWst == null) {
                         break;
                     }
                     var existW = moves.Find(x => x.Name == moveWst && x.ParentKey == parentMove.Key);
-                    if(existW != null) {
+                    if (existW != null) {
                         existW.Count++;
 
                     } else {
@@ -105,7 +137,7 @@ namespace ChessGamesParser.Classes {
                         existW.IsWhite = true;
                         existW.ParentMove = parentMove;
                         var correctAnswerForWhite = correctAnswers.Find(x => x.FingerPrint == parentMove.FingerPrint);
-                        if(!showAllMoves && i > 1 && (correctAnswerForWhite == null || existW.Name != correctAnswerForWhite.Answer)) {
+                        if (!showAllMoves && i > 1 && (correctAnswerForWhite == null || existW.Name != correctAnswerForWhite.Answer)) {
                             break;
                         }
 
@@ -118,11 +150,11 @@ namespace ChessGamesParser.Classes {
                     }
                     parentMove = existW;
                     var moveBst = GetMove(gamePGN.MoveText, i, false)?.ToString();
-                    if(moveBst == null) {
+                    if (moveBst == null) {
                         break;
                     }
                     var existB = moves.Find(x => x.Name == moveBst && x.ParentKey == parentMove.Key);
-                    if(existB != null) {
+                    if (existB != null) {
                         existB.Count++;
                     } else {
                         existB = new MyMove(moveBst);
@@ -175,10 +207,10 @@ namespace ChessGamesParser.Classes {
 
             }
             //  MessageBox.Show(cnt.ToString());
-            if(!showAllMoves) {
-                for(int i = moves.Count - 1; i >= 0; i--) {
+            if (!showAllMoves) {
+                for (int i = moves.Count - 1; i >= 0; i--) {
                     var mv = moves[i];
-                    if(mv.Count < 2) {
+                    if (mv.Count < 2) {
                         moves.Remove(mv);
                     }
                 }
@@ -188,7 +220,7 @@ namespace ChessGamesParser.Classes {
         }
 
         bool IsEnglishOpening(HalfMoveEntry move) {
-            if(move.MoveNumber == 1 && move.Move.Piece == PieceType.Pawn && move.Move.TargetSquare.File == ilf.pgn.Data.File.C && move.Move.TargetSquare.Rank == 4) {
+            if (move.MoveNumber == 1 && move.Move.Piece == PieceType.Pawn && move.Move.TargetSquare.File == ilf.pgn.Data.File.C && move.Move.TargetSquare.Rank == 4) {
                 return true;
             }
             return false;

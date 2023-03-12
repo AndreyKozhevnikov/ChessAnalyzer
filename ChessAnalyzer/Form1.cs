@@ -193,6 +193,7 @@ namespace ChessAnalyzer {
             view.Color = Color.Green;
             view.ReductionOptions.Color = Color.Red;
 
+            ((XYDiagram)chartCandle.Diagram).AxisY.VisualRange.MinValue = minValue;
 
             Series volumeSeries = new Series("Volume", ViewType.Bar);
             volumeSeries.ArgumentDataMember = "Date";

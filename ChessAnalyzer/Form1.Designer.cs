@@ -1,4 +1,5 @@
-﻿using DevExpress.XtraTab;
+﻿using DevExpress.XtraEditors;
+using DevExpress.XtraTab;
 
 namespace ChessAnalyzer {
     partial class Form1 {
@@ -40,6 +41,8 @@ namespace ChessAnalyzer {
             this.xtraTabPage1 = new DevExpress.XtraTab.XtraTabPage();
             this.xtraTabPage2 = new DevExpress.XtraTab.XtraTabPage();
             this.ratingChart = new DevExpress.XtraCharts.ChartControl();
+            this.xtraTabPage3 = new DevExpress.XtraTab.XtraTabPage();
+            this.chartCandle = new DevExpress.XtraCharts.ChartControl();
             this.simpleButton1 = new DevExpress.XtraEditors.SimpleButton();
             this.bulidPgnFull = new DevExpress.XtraEditors.SimpleButton();
             ((System.ComponentModel.ISupportInitialize)(this.treeMoves)).BeginInit();
@@ -48,6 +51,8 @@ namespace ChessAnalyzer {
             this.xtraTabPage1.SuspendLayout();
             this.xtraTabPage2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.ratingChart)).BeginInit();
+            this.xtraTabPage3.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.chartCandle)).BeginInit();
             this.SuspendLayout();
             // 
             // importDataFromFileBtn
@@ -97,7 +102,7 @@ namespace ChessAnalyzer {
             this.treeMoves.Dock = System.Windows.Forms.DockStyle.Fill;
             this.treeMoves.Location = new System.Drawing.Point(0, 0);
             this.treeMoves.Name = "treeMoves";
-            this.treeMoves.Size = new System.Drawing.Size(2600, 1399);
+            this.treeMoves.Size = new System.Drawing.Size(2682, 1466);
             this.treeMoves.TabIndex = 4;
             this.treeMoves.CustomUnboundColumnData += new DevExpress.XtraTreeList.CustomColumnDataEventHandler(this.treeMoves_CustomUnboundColumnData);
             // 
@@ -157,17 +162,18 @@ namespace ChessAnalyzer {
             this.xtraTabControl1.Location = new System.Drawing.Point(3, 53);
             this.xtraTabControl1.Name = "xtraTabControl1";
             this.xtraTabControl1.SelectedTabPage = this.xtraTabPage1;
-            this.xtraTabControl1.Size = new System.Drawing.Size(2602, 1434);
+            this.xtraTabControl1.Size = new System.Drawing.Size(2684, 1800);
             this.xtraTabControl1.TabIndex = 6;
             this.xtraTabControl1.TabPages.AddRange(new DevExpress.XtraTab.XtraTabPage[] {
             this.xtraTabPage1,
-            this.xtraTabPage2});
+            this.xtraTabPage2,
+            this.xtraTabPage3});
             // 
             // xtraTabPage1
             // 
             this.xtraTabPage1.Controls.Add(this.treeMoves);
             this.xtraTabPage1.Name = "xtraTabPage1";
-            this.xtraTabPage1.Size = new System.Drawing.Size(2600, 1399);
+            this.xtraTabPage1.Size = new System.Drawing.Size(2682, 1466);
             this.xtraTabPage1.Text = "Data";
             // 
             // xtraTabPage2
@@ -185,6 +191,22 @@ namespace ChessAnalyzer {
             this.ratingChart.SeriesSerializable = new DevExpress.XtraCharts.Series[0];
             this.ratingChart.Size = new System.Drawing.Size(2600, 1399);
             this.ratingChart.TabIndex = 0;
+            // 
+            // xtraTabPage3
+            // 
+            this.xtraTabPage3.Controls.Add(this.chartCandle);
+            this.xtraTabPage3.Name = "xtraTabPage3";
+            this.xtraTabPage3.Size = new System.Drawing.Size(2600, 1399);
+            this.xtraTabPage3.Text = "Candle";
+            // 
+            // chartCandle
+            // 
+            this.chartCandle.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.chartCandle.Location = new System.Drawing.Point(0, 0);
+            this.chartCandle.Name = "chartCandle";
+            this.chartCandle.SeriesSerializable = new DevExpress.XtraCharts.Series[0];
+            this.chartCandle.Size = new System.Drawing.Size(2600, 1399);
+            this.chartCandle.TabIndex = 0;
             // 
             // simpleButton1
             // 
@@ -208,7 +230,7 @@ namespace ChessAnalyzer {
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(2608, 1492);
+            this.ClientSize = new System.Drawing.Size(2687, 2200);
             this.Controls.Add(this.bulidPgnFull);
             this.Controls.Add(this.simpleButton1);
             this.Controls.Add(this.xtraTabControl1);
@@ -225,6 +247,8 @@ namespace ChessAnalyzer {
             this.xtraTabPage1.ResumeLayout(false);
             this.xtraTabPage2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.ratingChart)).EndInit();
+            this.xtraTabPage3.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.chartCandle)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -248,6 +272,8 @@ namespace ChessAnalyzer {
         private DevExpress.XtraEditors.SimpleButton simpleButton1;
         private DevExpress.XtraCharts.ChartControl ratingChart;
         private DevExpress.XtraEditors.SimpleButton bulidPgnFull;
+        private XtraTabPage xtraTabPage3;
+        private DevExpress.XtraCharts.ChartControl chartCandle;
     }
 }
 

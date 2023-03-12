@@ -2,6 +2,7 @@
 using ChessGamesParser.ChessArchive;
 using ChessGamesParser.Classes;
 using ChessGamesParser.Classes.XPOData;
+using DevExpress.Charts.Native;
 using DevExpress.Data.Filtering;
 using DevExpress.Export;
 using DevExpress.Xpo;
@@ -109,9 +110,9 @@ namespace ChessAnalyzer {
 
         private void buildRatingButton1_Click(object sender, EventArgs e) {
             var analyzer = new Analyzer();
-            var lst = analyzer.GetRating();
-            ratingChart.DataSource = lst.RatingData;
-            var minValue = lst.RatingData. Min(x => x.Rating);
+            var rating = analyzer.GetRating();
+            ratingChart.DataSource = rating.RatingData;
+            var minValue = rating.RatingData. Min(x => x.Rating);
             
             
             Series series = new Series("Rating", ViewType.Line);
@@ -171,10 +172,53 @@ namespace ChessAnalyzer {
             ((XYDiagram)ratingChart.Diagram).EnableAxisXScrolling = true;
             ((XYDiagram)ratingChart.Diagram).EnableAxisYScrolling = true;
 
+            //candle
+            chartCandle.DataSource= rating.Candles;
+            Series candleSeries = new Series("Candles", ViewType.CandleStick);
+            
+            candleSeries.SetFinancialDataMembers("Date", "Low", "High", "Open", "Close");
+            candleSeries.ArgumentScaleType = ScaleType.DateTime;
+            chartCandle.Series.Add(candleSeries);
+            CandleStickSeriesView view = (CandleStickSeriesView)candleSeries.View;
+
+            view.LineThickness = 2;
+            view.LevelLineLength = 0.25;
+
+            view.ReductionOptions.ColorMode = ReductionColorMode.OpenToCloseValue;
+            view.ReductionOptions.FillMode = CandleStickFillMode.AlwaysFilled;
+            view.ReductionOptions.Level = StockLevel.Close;
+            view.ReductionOptions.Visible = true;
+
+            // Set point colors.
+            view.Color = Color.Green;
+            view.ReductionOptions.Color = Color.Red;
+
+
+            Series volumeSeries = new Series("Volume", ViewType.Bar);
+            volumeSeries.ArgumentDataMember = "Date";
+            volumeSeries.ValueDataMembers.AddRange(new string[] { "Volume" });
+            volumeSeries.ArgumentScaleType = DevExpress.XtraCharts.ScaleType.DateTime;
+            chartCandle.Series.Add(volumeSeries);
+            var secAccsCandle = new SecondaryAxisY("Second");
+            var diag = ((XYDiagram)chartCandle.Diagram);
+           diag.SecondaryAxesY.Add(secAccsCandle);
+            var candleView = ((XYDiagramSeriesViewBase)volumeSeries.View);
+           candleView.AxisY = secAccsCandle;
+            
+
+            var pane = new XYDiagramPane("VolumePane");
+            
+            diag.Panes.Add(pane);
+            candleView.Pane = pane;
+
         }
 
         private void bulidPgnFull_Click(object sender, EventArgs e) {
             BuldPGNGrid(true);
+        }
+
+        private void candleButton_Click(object sender, EventArgs e) {
+
         }
     }
 }

@@ -90,6 +90,8 @@ namespace ChessGamesParser.Classes {
                     res.RatingData.Add(dt);
                 }
 
+                res.Candles = res.RatingData.GroupBy(x => x.Date.Date).Select(y => new MyCandle() { Date = y.Key,Open=y.First().Rating,Close=y.Last().Rating,High=y.Max(r=>r.Rating),Low=y.Min(r=>r.Rating),Volume=y.Count() }).ToList();
+
             }
             return res;
         }

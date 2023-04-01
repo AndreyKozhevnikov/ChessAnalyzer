@@ -26,7 +26,6 @@ namespace ChessAnalyzer {
         /// the contents of this method with the code editor.
         /// </summary>
         private void InitializeComponent() {
-            this.importDataFromFileBtn = new DevExpress.XtraEditors.SimpleButton();
             this.importFromApi = new DevExpress.XtraEditors.SimpleButton();
             this.exportRating = new DevExpress.XtraEditors.SimpleButton();
             this.buildPGN = new DevExpress.XtraEditors.SimpleButton();
@@ -55,20 +54,11 @@ namespace ChessAnalyzer {
             ((System.ComponentModel.ISupportInitialize)(this.chartCandle)).BeginInit();
             this.SuspendLayout();
             // 
-            // importDataFromFileBtn
-            // 
-            this.importDataFromFileBtn.Location = new System.Drawing.Point(25, 13);
-            this.importDataFromFileBtn.Name = "importDataFromFileBtn";
-            this.importDataFromFileBtn.Size = new System.Drawing.Size(112, 34);
-            this.importDataFromFileBtn.TabIndex = 0;
-            this.importDataFromFileBtn.Text = "ImportDataFromFile";
-            this.importDataFromFileBtn.Click += new System.EventHandler(this.importDataFromFileBtn_Click);
-            // 
             // importFromApi
             // 
-            this.importFromApi.Location = new System.Drawing.Point(170, 13);
+            this.importFromApi.Location = new System.Drawing.Point(83, 13);
             this.importFromApi.Name = "importFromApi";
-            this.importFromApi.Size = new System.Drawing.Size(112, 34);
+            this.importFromApi.Size = new System.Drawing.Size(199, 34);
             this.importFromApi.TabIndex = 1;
             this.importFromApi.Text = "ImportFromApi";
             this.importFromApi.Click += new System.EventHandler(this.importFromApi_Click);
@@ -241,7 +231,6 @@ namespace ChessAnalyzer {
             this.Controls.Add(this.buildPGN);
             this.Controls.Add(this.exportRating);
             this.Controls.Add(this.importFromApi);
-            this.Controls.Add(this.importDataFromFileBtn);
             this.Name = "Form1";
             this.Text = "Form1";
             ((System.ComponentModel.ISupportInitialize)(this.treeMoves)).EndInit();
@@ -257,8 +246,6 @@ namespace ChessAnalyzer {
         }
 
         #endregion
-
-        private DevExpress.XtraEditors.SimpleButton importDataFromFileBtn;
         private DevExpress.XtraEditors.SimpleButton importFromApi;
         private DevExpress.XtraEditors.SimpleButton exportRating;
         private DevExpress.XtraEditors.SimpleButton buildPGN;

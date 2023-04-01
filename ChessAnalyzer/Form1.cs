@@ -13,6 +13,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -71,7 +72,10 @@ namespace ChessAnalyzer {
         private void exportTree_Click(object sender, EventArgs e) {
 
             ExportSettings.DefaultExportType = ExportType.WYSIWYG;
-            treeMoves.ExportToXlsx("myTree.xlsx");
+            var folder = @"..\..\Export\";
+            var fileName = string.Format("export-{0}.xlsx", DateTime.Today.ToString("dd-MM-yy"));
+            var path = Path.Combine(folder, fileName);
+            treeMoves.ExportToXlsx(path);
         }
         UnitOfWork uow;
         Dictionary<string, string> correctMovesDict = new Dictionary<string, string>();

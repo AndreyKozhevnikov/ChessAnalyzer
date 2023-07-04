@@ -209,10 +209,11 @@ namespace ChessGamesParser.Classes {
 
             }
             //  MessageBox.Show(cnt.ToString());
+            var tst = moves.Where(m => m.FingerPrint == "1. c4 1... e5 2. g3 2... d5 3. cxd5 3... Qxd5 4. Nf3 4... Bg4 5. Nc3 5... Qc6");
             if (!showAllMoves) {
                 for (int i = moves.Count - 1; i >= 0; i--) {
                     var mv = moves[i];
-                    if (mv.Count < 2) {
+                    if (mv.Count < 3) {
                         moves.Remove(mv);
                     }
                 }

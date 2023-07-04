@@ -56,9 +56,9 @@ namespace ChessAnalyzer {
             // 
             // importFromApi
             // 
-            this.importFromApi.Location = new System.Drawing.Point(83, 13);
+            this.importFromApi.Location = new System.Drawing.Point(12, 12);
             this.importFromApi.Name = "importFromApi";
-            this.importFromApi.Size = new System.Drawing.Size(199, 34);
+            this.importFromApi.Size = new System.Drawing.Size(148, 34);
             this.importFromApi.TabIndex = 1;
             this.importFromApi.Text = "ImportFromApi";
             this.importFromApi.Click += new System.EventHandler(this.importFromApi_Click);
@@ -103,6 +103,7 @@ namespace ChessAnalyzer {
             this.NameCl.Name = "NameCl";
             this.NameCl.Visible = true;
             this.NameCl.VisibleIndex = 0;
+            this.NameCl.Width = 572;
             // 
             // Count
             // 
@@ -112,6 +113,7 @@ namespace ChessAnalyzer {
             this.Count.SortOrder = System.Windows.Forms.SortOrder.Descending;
             this.Count.Visible = true;
             this.Count.VisibleIndex = 1;
+            this.Count.Width = 135;
             // 
             // FingerPrint
             // 
@@ -119,15 +121,14 @@ namespace ChessAnalyzer {
             this.FingerPrint.FieldName = "FingerPrint";
             this.FingerPrint.Name = "FingerPrint";
             this.FingerPrint.Visible = true;
-            this.FingerPrint.VisibleIndex = 3;
+            this.FingerPrint.VisibleIndex = 2;
+            this.FingerPrint.Width = 1057;
             // 
             // MoveNumber
             // 
             this.MoveNumber.Caption = "MoveNumber";
             this.MoveNumber.FieldName = "MoveNumber";
             this.MoveNumber.Name = "MoveNumber";
-            this.MoveNumber.Visible = true;
-            this.MoveNumber.VisibleIndex = 2;
             // 
             // AnswerCl
             // 
@@ -136,7 +137,8 @@ namespace ChessAnalyzer {
             this.AnswerCl.Name = "AnswerCl";
             this.AnswerCl.UnboundDataType = typeof(string);
             this.AnswerCl.Visible = true;
-            this.AnswerCl.VisibleIndex = 4;
+            this.AnswerCl.VisibleIndex = 3;
+            this.AnswerCl.Width = 522;
             // 
             // exportTree
             // 

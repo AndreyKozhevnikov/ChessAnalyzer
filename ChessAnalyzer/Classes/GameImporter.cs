@@ -7,6 +7,8 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Net.Http;
+using System.Net.Http.Headers;
+using System.Security.Policy;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -76,8 +78,15 @@ namespace ChessGamesParser.Classes {
 
         }
         public async void ImportGamesFromApi() {
-            var path = "https://api.chess.com/pub/player/freazeek/games/2023/04";
+            var path = "https://api.chess.com/pub/player/freazeek/games/2023/06";
+            var uri=new Uri(path);
             HttpClient client = new HttpClient();
+            //var  _req = new HttpRequestMessage(HttpMethod.Get, path.ToString());
+            // _req.Headers.Host = uri.Host;
+             client.DefaultRequestHeaders.Host = uri.Host;
+            var productValue = new ProductInfoHeaderValue("ScraperBot", "1.0");
+            client.DefaultRequestHeaders.UserAgent.Add(productValue);
+
             HttpResponseMessage response = await client.GetAsync(path);
             var jsonString= response.Content.ReadAsStringAsync().Result;
             
